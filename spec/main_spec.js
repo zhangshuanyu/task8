@@ -8,24 +8,21 @@ chai.use(sinonChai);
 
 var main = require("../lib/main.js");
 
-
-describe("测试描述", function(){
+describe("postcode and barcode convert test", function(){
     sinon.spy(console, 'log');
 
-    it("测试用例1", function(){
+    it("text postcard", function(){
 
-        var result = main();
-        var expect_string = '';
-        
+        var result = main(12255 );
+        var expect_string = '|\t:::||\t::|:|\t::|:|\t:|:|:\t:|:|:\t:|:|:\t|';
+
         expect(expect_string).to.equal(result);
     });
 
-    it("测试用例2", function(){
+    it("text barcode", function(){
 
-        main();
-        var result = _.flatten(console.log.args).join("\n");
-        var expect_string = '';
-
+        var result =  main('|\t:|::|\t:|::|\t:|::|\t:|::|\t:|::|\t:::||\t::|:|\t::||:\t:|::|\t||:::\t|');
+        var expect_string = '44444-1234' ;
         expect(expect_string).to.equal(result);
     });
 });
